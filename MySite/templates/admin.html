@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Paneli</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-bottom: 30px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+    }
+    th {
+      background: #2c3e50;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <h1>📊 Admin Paneli</h1>
+  <a href="/">Ana Sayfa</a> | 
+  <a href="/add">Kullanıcı Ekle</a> | 
+  <a href="/users">Kullanıcılar</a>
+
+  {% for table, rows in data.items() %}
+    <h2>Tablo: {{ table }}</h2>
+    {% if rows %}
+      <table>
+        <tr>
+          {% for col in rows[0].keys() %}
+            <th>{{ col }}</th>
+          {% endfor %}
+        </tr>
+        {% for row in rows %}
+          <tr>
+            {% for col in row.keys() %}
+              <td>{{ row[col] }}</td>
+            {% endfor %}
+          </tr>
+        {% endfor %}
+      </table>
+    {% else %}
+      <p>Bu tabloda kayıt yok.</p>
+    {% endif %}
+  {% endfor %}
+</body>
+</html>
